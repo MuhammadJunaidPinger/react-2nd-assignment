@@ -1,26 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Home from "./Screens/Home"
+import Login from "./Screens/Login"
+import MeraButton from "./Component/MeraButton"
+import Swal from "sweetalert2"
+import { Fab, AddIcon } from '@material-ui/core';
+import EmployeeList from "./Component/EmployeeList/employeeData"
+import EmployeeForm from "./Component/EmployeeForm/form"
 
-function App() {
-  return (
-    <div className="App">
+class App extends Component {
+  state = {
+    user: false
+  }
+  onlogin = () => {
+    this.setState({
+      user: true
+    })
+  }
+  onUserLogOut = () => {
+    this.setState({
+      user: false
+    })
+  }
+
+  render() {
+    const {user} = this.state
+    return (
+      <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+         <Login onlogin={this.onlogin.bind(this)}/>
+        <EmployeeForm />
+        <EmployeeList onLogout={this.onUserLogOut.bind(this)}/>
+
+          <br/>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
